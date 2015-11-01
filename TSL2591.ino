@@ -152,6 +152,17 @@ void advancedRead(void)
   Serial.print("Lux: "); Serial.println(tsl.calculateLux(full, ir));
 }
 
+uint16_t getLux(void)
+{
+  uint32_t lum = tsl.getFullLuminosity();
+  uint16_t ir, full, lux;
+  ir = lum >> 16;
+  full = lum & 0xFFFF;
+  lux = tsl.calculateLux(full, ir);
+  Particle.publish("finestril_externallux", String(lux), 60, PRIVATE);
+  return lux;
+}
+
 /**************************************************************************/
 /*
     Performs a read using the Adafruit Unified Sensor API.
@@ -189,8 +200,8 @@ void unifiedSensorAPIRead(void)
 void loop(void)
 {
   // simpleRead();
-  // advancedRead();
-  unifiedSensorAPIRead();
-
-  delay(250);
+  //advancedRead();
+  //unifiedSensorAPIRead();
+  Serial.println(getLux());
+  delay(1000);
 }

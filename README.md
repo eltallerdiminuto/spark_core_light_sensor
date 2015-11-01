@@ -21,7 +21,7 @@ http://docs.particle.io/cli/
 Wiring:
 
     Particle pin D0 --> SDA
-    SpParticleark pin D1 --> SCL
+    Particle pin D1 --> SCL
     Spark GND --> GND
     Spark 3v3 --> VIn
 
